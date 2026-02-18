@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Muhammadsiddiq | Full Stack Developer</title>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap');
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --purple: #7c3aed;
+            --purple-light: #a78bfa;
+            --dark: #09090b;
+            --card: #111113;
+            --border: #27272a;
+            --text: #e4e4e7;
+            --muted: #71717a;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--dark);
+            color: var(--text);
+            overflow-x: hidden;
+        }
+
+        /* NAV */
+        nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 100;
+            padding: 18px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(9,9,11,0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        nav .logo {
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: var(--purple-light);
+            letter-spacing: -0.5px;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 30px;
+        }
+
+        nav ul a {
+            color: var(--muted);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.2s;
+        }
+
+        nav ul a:hover { color: #fff; }
+
+        /* HERO */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 0 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(124,58,237,0.15) 0%, transparent 70%);
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            padding: 6px 16px;
+            background: rgba(124,58,237,0.15);
+            border: 1px solid rgba(124,58,237,0.4);
+            border-radius: 100px;
+            font-size: 0.8rem;
+            color: var(--purple-light);
+            margin-bottom: 24px;
+            animation: fadeInDown 0.6s ease;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 6vw, 5rem);
+            font-weight: 900;
+            line-height: 1.1;
+            letter-spacing: -2px;
+            animation: fadeInUp 0.7s ease 0.1s both;
+        }
+
+        .hero h1 .name {
+            background: linear-gradient(135deg, #fff 0%, var(--purple-light) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            margin-top: 20px;
+            color: var(--muted);
+            font-size: 1.1rem;
+            max-width: 500px;
+            line-height: 1.7;
+            animation: fadeInUp 0.7s ease 0.2s both;
+        }
+
+        .hero-btns {
+            margin-top: 36px;
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: fadeInUp 0.7s ease 0.3s both;
+        }
+
+        .btn-primary {
+            padding: 14px 32px;
+            background: var(--purple);
+            color: #fff;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.2s;
+            border: 1px solid transparent;
+        }
+
+        .btn-primary:hover {
+            background: #6d28d9;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(124,58,237,0.4);
+        }
+
+        .btn-secondary {
+            padding: 14px 32px;
+            background: transparent;
+            color: var(--text);
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.2s;
+            border: 1px solid var(--border);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--purple);
+            color: var(--purple-light);
+            transform: translateY(-2px);
+        }
+
+        /* SECTIONS */
+        section {
+            padding: 100px 20px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .section-label {
+            font-size: 0.8rem;
+            color: var(--purple-light);
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+        }
+
+        .section-title {
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            font-weight: 800;
+            letter-spacing: -1px;
+            margin-bottom: 50px;
+        }
+
+        /* SKILLS */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            gap: 16px;
+        }
+
+        .skill-item {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 20px;
+            text-align: center;
+            transition: all 0.3s;
+            cursor: default;
+        }
+
+        .skill-item:hover {
+            border-color: var(--purple);
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px rgba(124,58,237,0.2);
+        }
+
+        .skill-icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .skill-item span {
+            font-size: 0.85rem;
+            color: var(--muted);
+            font-weight: 500;
+        }
+
+        /* PROJECTS */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+        }
+
+        .project-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 32px;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--purple), var(--purple-light));
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .project-card:hover {
+            border-color: var(--purple);
+            transform: translateY(-6px);
+            box-shadow: 0 20px 60px rgba(124,58,237,0.2);
+        }
+
+        .project-card:hover::before { opacity: 1; }
+
+        .project-emoji {
+            font-size: 2.5rem;
+            margin-bottom: 16px;
+        }
+
+        .project-card h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: #fff;
+        }
+
+        .project-card p {
+            color: var(--muted);
+            font-size: 0.9rem;
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .tag {
+            padding: 4px 12px;
+            background: rgba(124,58,237,0.15);
+            color: var(--purple-light);
+            border-radius: 100px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        /* CONTACT */
+        .contact-box {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 60px 40px;
+            text-align: center;
+        }
+
+        .contact-box h3 {
+            font-size: 1.8rem;
+            font-weight: 800;
+            margin-bottom: 12px;
+            letter-spacing: -1px;
+        }
+
+        .contact-box p {
+            color: var(--muted);
+            margin-bottom: 32px;
+            font-size: 1rem;
+        }
+
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .contact-link {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 24px;
+            background: #18181b;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            color: var(--text);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .contact-link:hover {
+            border-color: var(--purple);
+            color: var(--purple-light);
+            transform: translateY(-2px);
+        }
+
+        /* FOOTER */
+        footer {
+            text-align: center;
+            padding: 30px;
+            color: var(--muted);
+            font-size: 0.85rem;
+            border-top: 1px solid var(--border);
+        }
+
+        /* ANIMATIONS */
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* SCROLLBAR */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: var(--dark); }
+        ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+    </style>
+</head>
+<body>
+
+<nav>
+    <div class="logo">MS.</div>
+    <ul>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#projects">Loyihalar</a></li>
+        <li><a href="#contact">Bog'lanish</a></li>
+    </ul>
+</nav>
+
+<div class="hero">
+    <div>
+        <div class="hero-badge">✦ Full Stack Developer</div>
+        <h1>Salom, men <br><span class="name">Muhammadsiddiq</span></h1>
+        <p>Python, Django va JavaScript yordamida zamonaviy web ilovalar yarataman.</p>
+        <div class="hero-btns">
+            <a href="#projects" class="btn-primary">Loyihalarni ko'rish →</a>
+            <a href="#contact" class="btn-secondary">Bog'lanish</a>
+        </div>
+    </div>
+</div>
+
+<section id="skills">
+    <div class="section-label">Texnologiyalar</div>
+    <div class="section-title">Nima bilaman?</div>
+    <div class="skills-grid">
+        <div class="skill-item" data-aos="fade-up" data-aos-delay="0">
+            <div class="skill-icon">🌐</div>
+            <span>HTML</span>
+        </div>
+        <div class="skill-item" data-aos="fade-up" data-aos-delay="50">
+            <div class="skill-icon">🎨</div>
+            <span>CSS</span>
+        </div>
+        <div class="skill-item" data-aos="fade-up" data-aos-delay="100">
+            <div class="skill-icon">⚡</div>
+            <span>JavaScript</span>
+        </div>
+        <div class="skill-item" data-aos="fade-up" data-aos-delay="150">
+            <div class="skill-icon">🐍</div>
+            <span>Python</span>
+        </div>
+        <div class="skill-item" data-aos="fade-up" data-aos-delay="200">
+            <div class="skill-icon">🚀</div>
+            <span>Django</span>
+        </div>
+        <div class="skill-item" data-aos="fade-up" data-aos-delay="250">
+            <div class="skill-icon">📦</div>
+            <span>Bootstrap</span>
+        </div>
+        <div class="skill-item" data-aos="fade-up" data-aos-delay="300">
+            <div class="skill-icon">🔧</div>
+            <span>Git & GitHub</span>
+        </div>
+    </div>
+</section>
+
+<section id="projects">
+    <div class="section-label">Portfolio</div>
+    <div class="section-title">Loyihalarim</div>
+    <div class="projects-grid">
+        <div class="project-card" data-aos="fade-up" data-aos-delay="0">
+            <div class="project-emoji">🛒</div>
+            <h3>Online Shop</h3>
+            <p>Mahsulotlarni ko'rish va buyurtma berish imkoniyatli zamonaviy online do'kon saytining front-end qismi.</p>
+            <div class="project-tags">
+                <span class="tag">HTML</span>
+                <span class="tag">CSS</span>
+                <span class="tag">JavaScript</span>
+            </div>
+        </div>
+        <div class="project-card" data-aos="fade-up" data-aos-delay="100">
+            <div class="project-emoji">🎓</div>
+            <h3>O'quv Markaz Sayti</h3>
+            <p>O'quv markaz uchun to'liq sayt — foydalanuvchi interfeysi va Django asosidagi admin panel.</p>
+            <div class="project-tags">
+                <span class="tag">Django</span>
+                <span class="tag">Python</span>
+                <span class="tag">HTML/CSS</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="contact">
+    <div class="contact-box" data-aos="fade-up">
+        <h3>Birga ishlaylikmi? 🤝</h3>
+        <p>Loyiha yoki hamkorlik bo'yicha murojaat qiling</p>
+        <div class="contact-links">
+            <a href="https://t.me/Webdevloper07" class="contact-link">
+                ✈️ Telegram
+            </a>
+            <a href="https://github.com/web-coder2008" class="contact-link">
+                💻 GitHub
+            </a>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <p>© 2025 Muhammadsiddiq · Full Stack Developer</p>
+</footer>
+
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+    AOS.init({ duration: 600, once: true, offset: 80 });
+</script>
+
+</body>
+</html>
